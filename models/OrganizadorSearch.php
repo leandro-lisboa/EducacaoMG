@@ -11,14 +11,20 @@ use app\models\Organizador;
  */
 class OrganizadorSearch extends Organizador
 {
+
+    public function attributes()
+    {      
+        return array_merge(parent::attributes(), ['escola.nome']);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'escola_id'], 'integer'],
-            [['nome', 'cargo'], 'safe'],
+            [['id'], 'integer'],
+            [['nome', 'cargo', 'escola.nome'], 'safe'],
         ];
     }
 
@@ -48,6 +54,12 @@ class OrganizadorSearch extends Organizador
             'query' => $query,
         ]);
 
+        $query->joinWith(['escola']);
+        $dataProvider->sort->attributes['escola.nome'] = [
+        'asc' => ['escola.nome' => SORT_ASC],
+        'desc' => ['escola.nome' => SORT_DESC],
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -62,8 +74,9 @@ class OrganizadorSearch extends Organizador
             'escola_id' => $this->escola_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'cargo', $this->cargo]);
+        $query->andFilterWhere(['like', 'organizador.nome', $this->nome])
+            ->andFilterWhere(['like', 'cargo', $this->cargo])
+            ->andFilterWhere(['like', 'escola.nome',$this->getAttribute('escola.nome')]);
 
         return $dataProvider;
     }

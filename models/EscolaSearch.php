@@ -11,6 +11,12 @@ use app\models\Escola;
  */
 class EscolaSearch extends Escola
 {
+
+    public function attributes()
+   {      
+       return array_merge(parent::attributes(), ['usuario.nome']);
+   }
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +24,7 @@ class EscolaSearch extends Escola
     {
         return [
             [['id'], 'integer'],
-            [['nome', 'telefone', 'email'], 'safe'],
+            [['nome', 'telefone', 'email', 'usuario.nome'], 'safe'],
         ];
     }
 
@@ -48,6 +54,15 @@ class EscolaSearch extends Escola
             'query' => $query,
         ]);
 
+        $query->joinWith(['usuario']);
+        $dataProvider->sort->attributes['usuario.nome'] = [
+        'asc' => ['usuario.nome' => SORT_ASC],
+        'desc' => ['usuario.nome' => SORT_DESC],
+        ];
+
+
+   
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -59,11 +74,14 @@ class EscolaSearch extends Escola
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'usuario_id' => $this->usuario_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
+        $query->andFilterWhere(['like', 'escola.nome', $this->nome])
             ->andFilterWhere(['like', 'telefone', $this->telefone])
-            ->andFilterWhere(['like', 'email', $this->email]);
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'usuario.nome',$this->getAttribute('usuario.nome')]);
+
 
         return $dataProvider;
     }

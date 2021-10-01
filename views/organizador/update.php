@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Organizador */
 
-$this->title = 'Update Organizador: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Organizadors', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Atualizar Organizador: ' . $model->nome;
+$this->params['breadcrumbs'][] = ['label' => 'Organizador', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->nome, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <div class="organizador-update">
 

@@ -18,7 +18,8 @@ class m210918_030736_criar_tabela_projeto extends Migration
         'escola_id'=>$this->integer(),
         'data'=>$this->string(),
         'organizador_id'=>$this->integer(),
-        'anexo'=>$this->string()
+        'anexo'=>$this->string(),
+        'categoria'=>$this->string()
         ]);
         $this->addForeignKey('escola_f_k', 'projeto', 'escola_id', 'escola', 'id', 'restrict');
         $this->addForeignKey('organizador_fk', 'projeto', 'organizador_id', 'organizador', 'id', 'restrict');

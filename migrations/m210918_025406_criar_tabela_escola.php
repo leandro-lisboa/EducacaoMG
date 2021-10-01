@@ -16,8 +16,10 @@ class m210918_025406_criar_tabela_escola extends Migration
         'id'=>$this->primaryKey(),
         'nome'=>$this->string(),
         'telefone'=>$this->string(),
-        'email'=>$this->string()
+        'email'=>$this->string(),
+        'usuario_id'=>$this->integer()
         ]);
+        $this->addForeignKey('usuario_fk', 'escola', 'usuario_id', 'usuario', 'id', 'restrict');
     }
 
     /**
@@ -25,6 +27,7 @@ class m210918_025406_criar_tabela_escola extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('usuario_fk', 'escola');
         $this->dropTable('escola');
     }
 

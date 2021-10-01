@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Organizador */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Organizadors', 'url' => ['index']];
+$this->title = $model->nome;
+$this->params['breadcrumbs'][] = ['label' => 'Organizador', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Apagar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Tem certeza que deseja apagar este organizador?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -32,7 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nome',
             'cargo',
-            'escola_id',
+            [
+                'attribute'=>'escola.nome',
+                'label'=>'Escola'
+            ],
         ],
     ]) ?>
 

@@ -11,6 +11,8 @@ use Yii;
  * @property string|null $login
  * @property string|null $senha
  * @property string|null $nome
+ *
+ * @property Escola[] $escolas
  */
 class Usuario extends \yii\db\ActiveRecord
 {
@@ -43,5 +45,15 @@ class Usuario extends \yii\db\ActiveRecord
             'senha' => 'Senha',
             'nome' => 'Nome',
         ];
+    }
+
+    /**
+     * Gets query for [[Escolas]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEscolas()
+    {
+        return $this->hasMany(Escola::className(), ['usuario_id' => 'id']);
     }
 }

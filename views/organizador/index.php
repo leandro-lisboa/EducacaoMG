@@ -2,12 +2,14 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use app\models\Escola;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OrganizadorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Organizadors';
+$this->title = 'Organizador';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="organizador-index">
@@ -15,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Organizador', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cadastrar Organizador', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,10 +28,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'nome',
-            'cargo',
-            'escola_id',
+            //'id',
+            [
+                'attribute'=>'nome',
+                'filterInputOptions' => [
+                    'class'       => 'form-control',
+                    'placeholder' => 'Digite o nome e confirme'
+                ], 
+            ],
+            [
+                'attribute'=>'cargo',
+                'filterInputOptions' => [
+                    'class'       => 'form-control',
+                    'placeholder' => 'Digite o cargo e confirme'
+                ], 
+            ],
+            [
+                'label'=>'Escola',
+                'attribute'=>'escola.nome',
+                'filter' => Html::activeDropDownList($searchModel, 'escola.nome', 
+                ArrayHelper::map(Escola::find()->asArray()->orderby('nome')->all(), 'nome', 'nome'),
+                    ['class'=>'form-control','prompt' => 'Selecione uma escola']),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

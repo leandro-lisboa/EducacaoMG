@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Organizador */
 
-$this->title = 'Create Organizador';
-$this->params['breadcrumbs'][] = ['label' => 'Organizadors', 'url' => ['index']];
+$this->title = 'Cadastrar Organizador';
+$this->params['breadcrumbs'][] = ['label' => 'Organizador', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="organizador-create">

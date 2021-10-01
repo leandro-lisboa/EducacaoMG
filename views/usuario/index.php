@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UsuarioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Usuarios';
+$this->title = 'Usuário';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="usuario-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Usuario', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cadastrar Usuário', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,10 +26,34 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'login',
-            'senha',
-            'nome',
+            // [
+            //     'attribute'=>'id',
+            //     'filterInputOptions' => [
+            //         'class'       => 'form-control',
+            //         'placeholder' => 'Digite o ID e confirme'
+            //     ], 
+            // ],
+            [
+                'attribute'=>'login',
+                'filterInputOptions' => [
+                    'class'       => 'form-control',
+                    'placeholder' => 'Digite o login e confirme'
+                ], 
+            ],
+            [
+                'attribute'=>'senha',
+                'filterInputOptions' => [
+                    'class'       => 'form-control',
+                    'placeholder' => 'Digite senha e confirme'
+                ], 
+            ],
+            [
+                'attribute'=>'nome',
+                'filterInputOptions' => [
+                    'class'       => 'form-control',
+                    'placeholder' => 'Digite o nome e confirme'
+                ], 
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

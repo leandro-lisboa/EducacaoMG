@@ -11,14 +11,20 @@ use app\models\Projeto;
  */
 class ProjetoSearch extends Projeto
 {
+
+    public function attributes()
+   {      
+       return array_merge(parent::attributes(), ['escola.nome', 'organizador.nome']);
+   }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'escola_id', 'organizador_id'], 'integer'],
-            [['nome', 'data', 'anexo'], 'safe'],
+            [['id'], 'integer'],
+            [['nome', 'data', 'anexo', 'categoria', 'escola.nome', 'organizador.nome'], 'safe'],
         ];
     }
 
@@ -48,6 +54,18 @@ class ProjetoSearch extends Projeto
             'query' => $query,
         ]);
 
+        $query->joinWith(['escola']);
+        $dataProvider->sort->attributes['escola.nome'] = [
+        'asc' => ['escola.nome' => SORT_ASC],
+        'desc' => ['escola.nome' => SORT_DESC],
+        ];
+
+        $query->joinWith(['organizador']);
+        $dataProvider->sort->attributes['organizador.nome'] = [
+        'asc' => ['organizador.nome' => SORT_ASC],
+        'desc' => ['organizador.nome' => SORT_DESC],
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -63,9 +81,12 @@ class ProjetoSearch extends Projeto
             'organizador_id' => $this->organizador_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
+        $query->andFilterWhere(['like', 'projeto.nome', $this->nome])
             ->andFilterWhere(['like', 'data', $this->data])
-            ->andFilterWhere(['like', 'anexo', $this->anexo]);
+            ->andFilterWhere(['like', 'anexo', $this->anexo])
+            ->andFilterWhere(['like', 'categoria', $this->categoria])
+            ->andFilterWhere(['like', 'escola.nome',$this->getAttribute('escola.nome')])
+            ->andFilterWhere(['like', 'organizador.nome',$this->getAttribute('organizador.nome')]);
 
         return $dataProvider;
     }

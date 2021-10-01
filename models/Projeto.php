@@ -13,6 +13,7 @@ use Yii;
  * @property string|null $data
  * @property int|null $organizador_id
  * @property string|null $anexo
+ * @property string|null $categoria
  *
  * @property Escola $escola
  * @property Organizador $organizador
@@ -34,7 +35,7 @@ class Projeto extends \yii\db\ActiveRecord
     {
         return [
             [['escola_id', 'organizador_id'], 'integer'],
-            [['nome', 'data', 'anexo'], 'string', 'max' => 255],
+            [['nome', 'data', 'anexo', 'categoria'], 'string', 'max' => 255],
             [['escola_id'], 'exist', 'skipOnError' => true, 'targetClass' => Escola::className(), 'targetAttribute' => ['escola_id' => 'id']],
             [['organizador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Organizador::className(), 'targetAttribute' => ['organizador_id' => 'id']],
         ];
@@ -52,6 +53,7 @@ class Projeto extends \yii\db\ActiveRecord
             'data' => 'Data',
             'organizador_id' => 'Organizador ID',
             'anexo' => 'Anexo',
+            'categoria' => 'Categoria',
         ];
     }
 
