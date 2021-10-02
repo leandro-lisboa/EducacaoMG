@@ -14,7 +14,7 @@ use Yii;
  *
  * @property Escola[] $escolas
  */
-class Usuario extends \yii\db\ActiveRecord
+class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -56,4 +56,62 @@ class Usuario extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Escola::className(), ['usuario_id' => 'id']);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        throw new  yii\base\UnknownPropertyException();
+    }
+ 
+        /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthKey()
+    {
+       // throw new  yii\base\UnknownPropertyException();
+    }
+ 
+    public function validateAuthKey($authKey)
+    {
+        //throw new  yii\base\UnknownPropertyException();
+    }
+ 
+    public static function findByUsername($username){
+        return self::findOne(['login'=>$username]);
+    }
+ 
+    public function validatePassword($password)
+    {
+        return Yii::$app->getSecurity()->validatePassword($password, $this->senha);
+    }
+
+    public function beforeSave($insert)
+    {
+       if (parent::beforeSave($insert)) {
+           $this->senha = Yii::$app->security->generatePasswordHash($this->senha);
+           return true;
+       } else {
+           return false;
+       }
+    }
+
+
 }

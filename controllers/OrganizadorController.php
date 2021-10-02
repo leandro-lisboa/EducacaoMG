@@ -2,11 +2,14 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Organizador;
 use app\models\OrganizadorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * OrganizadorController implements the CRUD actions for Organizador model.
@@ -26,6 +29,32 @@ class OrganizadorController extends Controller
                     'actions' => [
                         'delete' => ['POST'],
                     ],
+                ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'only' => ['create', 'delete', 'view', 'update'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['?'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create', 'delete', 'update', 'view'],
+                            'roles' => ['@'],
+                        ],
+                    ],
+      
+                    'denyCallback' => function($rule, $action) {
+                        if (Yii::$app->user->isGuest) {
+                            Yii::$app->user->loginRequired();
+                        }
+                        else {
+                            throw new ForbiddenHttpException('Somente administradores podem entrar nessa página.');
+                        }                   
+                    }
+      
                 ],
             ]
         );
