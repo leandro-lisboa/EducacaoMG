@@ -12,12 +12,12 @@ use app\models\Escola;
 $this->title = 'Organizador';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="organizador-index">
+<div class="organizador-index card card-outline card-primary">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="card-header">
 
     <p>
-        <?= Html::a('Cadastrar Organizador', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cadastrar Organizador', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,8 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'summary' => '',
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             //'id',
             [
@@ -54,6 +55,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+</div>
 
 
 </div>

@@ -11,7 +11,9 @@ use app\models\Organizador;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="projeto-form">
+<div class="projeto-form card card-outline card-primary">
+
+<div class="card-body">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -38,9 +40,12 @@ use app\models\Organizador;
     <?= $form->field($model, 'categoria')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="fa fa-chevron-left"></i> Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::submitButton('<i class="fa fa-check-square"></i> Salvar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+
+</div>
 
 </div>

@@ -10,7 +10,9 @@ use app\models\Escola;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="organizador-form">
+<div class="organizador-form card card-outline card-primary">
+
+<div class="card-body">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -26,9 +28,12 @@ use app\models\Escola;
     ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="fa fa-chevron-left"></i> Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::submitButton('<i class="fa fa-check-square"></i> Salvar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+
+</div>
 
 </div>

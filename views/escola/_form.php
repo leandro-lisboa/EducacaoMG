@@ -10,7 +10,9 @@ use app\models\Usuario;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="escola-form">
+<div class="escola-form card card-outline card-primary">
+
+<div class="card-body">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -24,14 +26,17 @@ use app\models\Usuario;
        dropDownList(ArrayHelper::map(Usuario::find()
            ->orderBy('nome')
            ->all(),'id','nome'),
-           ['prompt' => 'Selecione um usuario'] )
+           ['prompt' => 'Selecione um usuário'] )
     ?>
 
 
     <div class="form-group">
-        <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="fa fa-chevron-left"></i> Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::submitButton('<i class="fa fa-check-square"></i> Salvar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+
+</div>
 
 </div>

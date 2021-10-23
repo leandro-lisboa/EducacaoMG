@@ -10,21 +10,26 @@ use yii\grid\GridView;
 $this->title = 'Usuário';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="usuario-index">
+<div class="usuario-index card card-outline card-primary">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="card-header">
 
     <p>
-        <?= Html::a('Cadastrar Usuário', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cadastrar Usuário', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
+</div>
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <div class="card-body">
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'summary' => '',
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             // [
             //     'attribute'=>'id',
@@ -58,6 +63,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+    </div>
 
 
 </div>

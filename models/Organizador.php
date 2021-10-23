@@ -46,7 +46,7 @@ class Organizador extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'cargo' => 'Cargo',
-            'escola_id' => 'Escola ID',
+            'escola_id' => 'Escola',
         ];
     }
 

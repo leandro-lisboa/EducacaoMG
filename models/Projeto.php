@@ -49,9 +49,9 @@ class Projeto extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'escola_id' => 'Escola ID',
+            'escola_id' => 'Escola',
             'data' => 'Data',
-            'organizador_id' => 'Organizador ID',
+            'organizador_id' => 'Organizador',
             'anexo' => 'Anexo',
             'categoria' => 'Categoria',
         ];

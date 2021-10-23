@@ -48,8 +48,8 @@ class Escola extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'telefone' => 'Telefone',
-            'email' => 'Email',
-            'usuario_id' => 'Usuario ID',
+            'email' => 'E-mail',
+            'usuario_id' => 'Usuário',
         ];
     }
 
